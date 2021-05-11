@@ -1,44 +1,26 @@
-import React, { Component } from 'react';
-import { Media, Card, CardImg, CardImgOverlay, CardText, CardBody, CardTitle} from 'reactstrap';
+import React from 'react';
+import { Media, Card, CardImg, CardImgOverlay, CardText, CardBody, CardTitle, Breadcrumb, BreadcrumbItem} from 'reactstrap';
+import {Link}from 'react-router-dom';
 
-class Menu extends Component {
+function RenderMenuItem({dish}) {
+    return (
+        <Card>
+          <Link to={`/menu/${dish.id}`}>
+            <CardImg width="100%" object src={dish.image} alt={dish.name}/>
+            <CardImgOverlay>
+                <CardTitle>{dish.name}</CardTitle>
+            </CardImgOverlay>
+          </Link>
+        </Card>
+    );
+}
 
-    constructor(props) {
-        super(props);
 
-        this.state = {
-            selectDish: null
-        }
-    }
-
-    onDishSelect(dish) {
-        this.setState({selectDish: dish});
-    }
-
-    renderDish(dish) {
-        if (dish!=null) {
+    const Menu = (props) => {
+        const menu = props.dishes.map((dish1) => {
             return (
-                <Card>
-                    <CardImg width="100%" object src={dish.image} alt={dish.name} />
-                    <CardBody>
-                        <CardTitle>{dish.name}</CardTitle>
-                        <CardText>{dish.description}</CardText>
-                    </CardBody>
-                </Card>
-            )
-        } 
-    }
-
-    render() {
-        const menu = this.props.dishes.map((dish) => {
-            return (
-              <div key={dish.id} className="col-12 col-md-5 m-1">
-                <Card onClick={() => this.onDishSelect(dish)}>
-                    <CardImg width="100%" object src={dish.image} alt={dish.name} />
-                    <CardImgOverlay>
-                        <CardTitle>{dish.name}</CardTitle>
-                  </CardImgOverlay>
-                </Card>
+              <div key={dish1.id} className="col-12 col-md-5 m-1">
+                <RenderMenuItem dish={dish1}/>
               </div>
             );
         });
@@ -46,15 +28,23 @@ class Menu extends Component {
         return (
           <div className="container">
             <div className="row">
-                {menu}
+              <Breadcrumb>
+                <BreadcrumbItem><Link to='/home'>Home</Link></BreadcrumbItem>
+                <BreadcrumbItem active>Menu</BreadcrumbItem>
+              </Breadcrumb>
+              <div className='col-12'>
+                <h3>Menu</h3>
+                <hr/>
+              </div>
             </div>
             <div className="row">
-                {this.renderDish(this.state.selectDish)}
+                {menu}
             </div>
           </div>
         );
     }
-}
+        
+ 
 
 
 export default Menu;
