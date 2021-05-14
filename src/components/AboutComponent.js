@@ -12,12 +12,6 @@ function About(props) {
         maxWidth: 128
       }
 
-    const leaders = props.leaders.map((leader) => {
-        return (
-            <p>Leader {leader.name}</p>
-        );
-    });
-
     const RenderLeader = () => props.leaders.map((leader) => {
         return (
           <div key={leader.id} className="col-12 mt-5">

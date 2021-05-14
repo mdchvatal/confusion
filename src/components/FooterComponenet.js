@@ -40,7 +40,7 @@ function Footer(props) {
                 </div>
                 <div className="row justify-content-center">             
                     <div className="col-auto">
-                        <p>© Copyright 2021 ConFusion</p>
+                        <p>© Copyright 2021 ConFusion - Learn React</p>
                     </div>
                 </div>
             </div>

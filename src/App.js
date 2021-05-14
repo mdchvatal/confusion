@@ -2,16 +2,23 @@ import React, { Component } from 'react';
 import MainComponent from './components/MainComponent';
 import './App.css';
 import { MemoryRouter } from 'react-router-dom';
+import {Provider} from 'react-redux';
+import {ConfigureStore} from './redux/configureStore';
+
+const store = ConfigureStore();
 
 class App extends Component{
 
+  
   render() {
       return (
-        <MemoryRouter>
-          <div>   
-            <MainComponent/>
-          </div>
-        </MemoryRouter>
+        <Provider store={store}>
+          <MemoryRouter>
+            <div>   
+              <MainComponent/>
+            </div>
+          </MemoryRouter>
+        </Provider>
     );
   }
 }

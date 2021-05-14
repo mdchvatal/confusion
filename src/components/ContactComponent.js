@@ -1,42 +1,27 @@
 import React, {Component} from 'react';
 
-import {Breadcrumb, BreadcrumbItem, Button, Form, FormGroup, Label, Input, Col} from 'reactstrap';
+import {Breadcrumb, BreadcrumbItem, Button, Label,  Col, Row} from 'reactstrap';
+import {Control, LocalForm, Errors} from 'react-redux-form';
 import {Link} from 'react-router-dom';
 
+const required = (val) => val && val.length;
+const minLength = (len) => (val) => val && (val.length >= len);
+const maxLength = (len) => (val) => !(val) || (val.length <= len);
+const isNumber = (val) => !isNaN(Number(val));
+const validEmail = (val) => /^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[a-zA-Z]{2,4}$/i.test(val);
 
 class Contact extends Component {
 
     constructor(props) {
         super(props);
-        this.state = {
-            firstname: '',
-            lastname: '',
-            telnum: '',
-            email: '',
-            agree: false,
-            contactType: 'Tel',
-            message: '',
             
-        }
-        this.handleSubmit = this.handleSubmit.bind(this);
-        this.handleInput = this.handleInput.bind(this);
-    }
-
-    handleInput(event) {
-        const target = event.target;
-        const value = target.type === 'checkbox' ? target.checked : target.value;
-        const name = target.name;
         
-        this.setState({
-            [name]: value
-        })
-
+        this.handleSubmit = this.handleSubmit.bind(this);
     }
 
-    handleSubmit(event) {
-        console.log("Current state is: " + JSON.stringify(this.state));
-        alert("Your entries are: " + JSON.stringify(this.state));
-        event.preventDefault();
+    handleSubmit(values) {
+        console.log("Current state is: " + JSON.stringify(values));
+        alert("Your entries are: " + JSON.stringify(values));
     }
 
     render() {
@@ -72,7 +57,7 @@ class Contact extends Component {
                     <div className="col-12 col-sm-11 offset-sm-1">
                         <div className="btn-group" role="group">
                             <a role="button" className="btn btn-primary" href="tel:+85212345678"><i className="fa fa-phone"></i> Call</a>
-                            <a role="button" className="btn btn-info"><i className="fa fa-skype"></i> Skype</a>
+                            <a role="button" className="btn btn-info" href="mailto:confusion@food.net"><i className="fa fa-skype"></i> Skype</a>
                             <a role="button" className="btn btn-success" href="mailto:confusion@food.net"><i className="fa fa-envelope-o"></i> Email</a>
                         </div>
                     </div>
@@ -82,60 +67,64 @@ class Contact extends Component {
                         <h3>Send Us Your Feedback!</h3>
                     </div>
                     <div className="col-12 col-md-9">
-                        <Form onSubmit={this.handleSubmit}>
-                            <FormGroup row>
+                        <LocalForm onSubmit={(values) => this.handleSubmit(values)}>
+                            <Row className="form-group">
                                 <Label htmlFor="firstname" md={2}>First Name</Label>
                                 <Col md={10}>
-                                    <Input type="text" id="firstname" name="firstname" placeholder="First Name" value={this.state.firstname} onChange={this.handleInput}/>
+                                    <Control.text model=".firstname" id="firstname" name="firstname" placeholder="First Name" className="form-control" validators={{required, minLength: minLength(3), maxLength: maxLength(15)}}/>
+                                   <Errors className="text-danger" model='.firstname'show="touched" messages={{required: 'Required', minLength: 'Must be longer than 2 characters.', maxLength: 'Must be less than 15 characters'}}/>
                                 </Col>
-                            </FormGroup>
-                            <FormGroup row>
+                            </Row>
+                            <Row className="form-group">
                                 <Label htmlFor="lastname" md={2}>Last Name</Label>
                                 <Col md={10}>
-                                    <Input type="text" id="lastname" name="lastname" placeholder="Last Name" value={this.state.lastname} onChange={this.handleInput}/>
+                                    <Control.text model=".lastname" id="lastname" name="lastname" placeholder="Last Name" className="form-control" validators={{required, minLength: minLength(3), maxLength: maxLength(15)}}/>
+                                    <Errors className="text-danger" model='.lastname'show="touched" messages={{required: 'Required', minLength: 'Must be longer than 2 characters.', maxLength: 'Must be less than 15 characters'}}/>
                                 </Col>
-                            </FormGroup>
-                            <FormGroup row>
+                            </Row>
+                            <Row className="form-group">
                                 <Label htmlFor="telnum" md={2}>Telephone Number</Label>
                                 <Col md={10}>
-                                    <Input type="tel" id="telnum" name="telnum" placeholder="Telephone Number" value={this.state.telnum} onChange={this.handleInput}/>
+                                    <Control.text model=".phone#" id="telnum" name="telnum" placeholder="Telephone Number" className="form-control" validators={{required, minLength: minLength(3), maxLength: maxLength(15), isNumber}}/>
+                                    <Errors className="text-danger" model='.phone#' show="touched" messages={{required: 'Required', minLength: 'Must be longer than 2 digits.', maxLength: 'Must be less than 15 digits', isNumber: 'Must contain only numbers'}}/>
                                 </Col>
-                            </FormGroup>
-                            <FormGroup row>
+                            </Row>
+                            <Row className="form-group">
                                 <Label htmlFor="email" md={2}>Email Address</Label>
                                 <Col md={10}>
-                                    <Input type="email" id="email" name="email" placeholder="Email" value={this.state.email} onChange={this.handleInput}/>
+                                    <Control.text model=".email" id="email" name="email" placeholder="Email" className="form-control" validators={{required, validEmail}}/>
+                                    <Errors className="text-danger" model='.email'show="touched" messages={{required: 'Required', validEmail: 'Must be a vild email address'}}/>
                                 </Col>
-                            </FormGroup>
-                            <FormGroup row>
+                            </Row>
+                            <Row className="form-group">
                                 <Col md={{size: 6, offset: 2}}>
-                                    <FormGroup check>
+                                    <div className="form-check">
                                         <Label check>
-                                            <Input type="checkbox" name="agree" checked={this.state.agree} onChange={this.handleInput}/>
+                                            <Control.checkbox model=".agree" className ="form-check-input" name="agree"/>
                                             <p>May we contact you?</p>
                                         </Label>                                   
-                                    </FormGroup>
+                                    </div>
                                 </Col>
                                 <Col md={{size: 3, offset: 1}}>
-                                    <Input type="select" name="contactType" value={this.state.contactType} onChange={this.handleInput}>
-                                        <option>Tel.</option>
+                                    <Control.select model="contact-type" className="form-control" name="contactType" >
+                                        <option>Phone</option>
                                         <option>Email</option>
-                                    </Input>
+                                    </Control.select>
                                 </Col>
-                            </FormGroup>
-                            <FormGroup row>
+                            </Row>
+                            <Row className="form-group">
                                 <Label htmlFor="feedback" md={2}>Your Feedback</Label>
                                 <Col md={10}>
-                                    <Input type="textarea" id="message" name="message" placeholder="Enter Your Feedback" rows="12" value={this.state.message} onChange={this.handleInput}/>
+                                    <Control.textarea model=".message" id="message" name="message" placeholder="Enter Your Feedback" rows="12" className="form-control"/>
                                 </Col>
-                            </FormGroup>
-                            <FormGroup row>
+                            </Row>
+                            <Row className="form-group">
                                 <Col md={{size: 10, offset: 2}}>
                                     <Button type="submit" color="primary">Send Feedback</Button>
                                 </Col>
-                            </FormGroup>
+                            </Row>
                             
-                        </Form>
+                        </LocalForm>
                     </div>
                 </div>
             </div>

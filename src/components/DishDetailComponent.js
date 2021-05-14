@@ -1,13 +1,14 @@
 import React from 'react';
-import { Media, Card, CardImg, CardImgOverlay, CardText, CardBody, CardTitle, Breadcrumb, BreadcrumbItem} from 'reactstrap';
+import {Button, Media, Card, CardImg, CardImgOverlay, CardText, CardBody, CardTitle, Breadcrumb, BreadcrumbItem} from 'reactstrap';
 import {Link} from 'react-router-dom';
+import CommentForm from './CommentFormComponent';
 
 
     function RenderComments({comments}) {
         if (comments != null) {
             return (
                 <div>
-                    <div><h4>Comments</h4></div>
+                    <div><h4>Reviews</h4></div>
                     <ul className="list-unstyled">
                         {comments.map((item) => (
                             <div>
@@ -60,8 +61,10 @@ import {Link} from 'react-router-dom';
                             </div>
                             <div className="col-6 col-md-5 m-1">    
                                 <RenderComments comments={props.comments}/>
+                                <CommentForm/>
                             </div>
                     </div>
+
                 </div>
             );
         } else {
