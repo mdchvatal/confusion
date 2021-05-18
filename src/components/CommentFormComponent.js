@@ -1,13 +1,10 @@
 import React, { Component } from 'react';
-import { Navbar, NavbarBrand, Nav, NavbarToggler, Collapse, NavItem, Jumbotron, Modal, Button, ModalHeader, ModalBody, FormGroup,  
-Label, Input, Form} from 'reactstrap';
+import {Modal, Button, ModalHeader, ModalBody, Label} from 'reactstrap';
 import {Control, LocalForm, Errors} from 'react-redux-form';
-import {NavLink} from 'react-router-dom';
 
 
 const minLength = (len) => (val) => val && (val.length >= len);
 const maxLength = (len) => (val) => !(val) || (val.length <= len);
-
 
 class CommentForm extends Component {
     constructor(props) {
@@ -26,8 +23,7 @@ class CommentForm extends Component {
 
     handleSubmit(values) {
         this.toggleModal();
-        console.log("Current state is: " + JSON.stringify(values));
-        alert("Your entries are: " + JSON.stringify(values));
+        this.props.addComment(this.props.dishId, values.rating, values.author, values.comment);
     }
 
     render() {
@@ -55,13 +51,13 @@ class CommentForm extends Component {
                             </Control.select>
                         </div>
                         <div className="form-group">
-                            <Label htmlFor="yourname" className="col-form-label">Your Name</Label>
-                            <Control.text model=".yourname" id="yourname" name="yourname" placeholder="Your Name" className="form-control" validators={{minLength: minLength(3), maxLength: maxLength(17)}}/>
-                            <Errors className="text-danger" model='.yourname'show="touched" messages={{minLength: 'Must be longer than 3 characters.', maxLength: 'Must be less than 17 characters'}}/>
+                            <Label htmlFor="author" className="col-form-label">Your Name</Label>
+                            <Control.text model=".author" id="author" name="author" placeholder="Your Name" className="form-control" validators={{minLength: minLength(3), maxLength: maxLength(17)}}/>
+                            <Errors className="text-danger" model='.author'show="touched" messages={{minLength: 'Must be longer than 3 characters.', maxLength: 'Must be less than 17 characters'}}/>
                         </div>
                         <div className="form-group">
-                            <Label htmlFor="review" className="col-form-label">Your Thoughts</Label>
-                            <Control.textarea model=".review" id="review" name="review" placeholder="Enter Your Feedback" rows="6" className="form-control"/>
+                            <Label htmlFor="comment" className="col-form-label">Your Thoughts</Label>
+                            <Control.textarea model=".comment" id="comment" name="comment" placeholder="Enter Your Feedback" rows="6" className="form-control"/>
                         </div>
                         <Button type="submit" value="submit" color="primary">Submit</Button>
                         </LocalForm>

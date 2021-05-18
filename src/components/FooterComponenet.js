@@ -19,12 +19,11 @@ function Footer(props) {
                     <div className="col-7 col-sm-5">
                         <h5>Our Address</h5>
                         <address>
-                        223 Chapel Hill Rd<br />
-                        Durham, NC 27701<br />
+                        Durham, NC 27704<br />
                         
-                        <i className="fa fa-phone fa-lg"></i>: (919)928-5222<br />
-                        <i className="fa fa-envelope fa-lg"></i>: <a href="mailto:confusion@food.net">
-                            confusion@food.net</a>
+                        <i className="fa fa-phone fa-lg"></i>: (919)306-7582<br />
+                        <i className="fa fa-envelope fa-lg"></i>: <a href="mailto:mdchvatal@gmail.com">
+                            mdchvatal@gmail.com</a>
                         </address>
                     </div>
                     <div className="col-12 col-sm-4 align-self-center">
@@ -34,7 +33,7 @@ function Footer(props) {
                             <a className="btn btn-social-icon btn-linkedin" target="_blank" href="https://www.linkedin.com/in/matthew-chvatal/"><i className="fa fa-linkedin"></i></a>
                             <a className="btn btn-social-icon btn-twitter" target="_blank" href="http://twitter.com/"><i className="fa fa-twitter"></i></a>
                             <a className="btn btn-social-icon btn-youtube" target="_blank" href="http://youtube.com/"><i className="fa fa-youtube"></i></a>
-                            <a className="btn btn-social-icon" target="_blank" href="mailto:"><i className="fa fa-envelope-o"></i></a>
+                            <a className="btn btn-social-icon" target="_blank" href="mailto:mdchvatal@gmail.com"><i className="fa fa-envelope-o"></i></a>
                         </div>
                     </div>
                 </div>

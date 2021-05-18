@@ -77,7 +77,7 @@ class Header extends Component {
                         <div className="row row-header">
                             <div className="col-12 col-sm-6">
                                 <h1>ConFusion</h1>
-                                <p>Welcome to ConFusion! We will befuddle you with ConFusion but worry not - we will be but a blur in your memory!</p>
+                                <h5>Welcome to ConFusion! We will befuddle you with ConFusion but worry not - we will React to your ConFusion and Redux your worries with our sweet stylings and smooth operation!</h5>
                             </div>
                         </div>    
                      </div>
