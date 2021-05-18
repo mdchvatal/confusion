@@ -24,7 +24,7 @@ export const LEADERS = [
       designation: 'Chief Taste Officer',
       abbr: 'CTO',
         featured: false,
-      description: 'Danny the action man! Danny is the guy who takes information and turns it into action. Anytime we need something done around here, we go straight to Danny Dispaatcher.'
+      description: 'Danny the action man! Danny is the guy who takes information and turns it into action. Anytime we need something done around here, we go straight to Danny Dispatcher.'
     },
     {
       id: 3,
