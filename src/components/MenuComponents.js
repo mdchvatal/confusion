@@ -21,7 +21,7 @@ import {Loading} from './LoadingComponent';
 		const menu = props.dishes.dishes.map((dish1) => {
 			return (
 				<div key={dish1.id} className="col-12 col-md-5 m-1">
-				<RenderMenuItem dish={dish1}/>
+					<RenderMenuItem dish={dish1}/>
 				</div>
 			);
 		});
