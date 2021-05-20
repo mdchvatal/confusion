@@ -20,6 +20,7 @@ class Contact extends Component {
     }
 
     handleSubmit(values) {
+        this.props.postFeedback(values);
         console.log("Current state is: " + JSON.stringify(values));
         alert("Your entries are: " + JSON.stringify(values));
         this.props.resetFeedbackForm();
@@ -86,7 +87,7 @@ class Contact extends Component {
                             <Row className="form-group">
                                 <Label htmlFor="telnum" md={2}>Telephone Number</Label>
                                 <Col md={10}>
-                                    <Control.text model=".phone#" id="telnum" name="telnum" placeholder="Telephone Number" className="form-control" validators={{required, minLength: minLength(3), maxLength: maxLength(15), isNumber}}/>
+                                    <Control.text model=".telnum" id="telnum" name="telnum" placeholder="Telephone Number" className="form-control" validators={{required, minLength: minLength(3), maxLength: maxLength(15), isNumber}}/>
                                     <Errors className="text-danger" model='.phone#' show="touched" messages={{required: 'Required', minLength: 'Must be longer than 2 digits.', maxLength: 'Must be less than 15 digits', isNumber: 'Must contain only numbers'}}/>
                                 </Col>
                             </Row>
