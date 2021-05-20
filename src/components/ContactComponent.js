@@ -48,8 +48,8 @@ class Contact extends Component {
                             223, Chapel Hill Rd<br />
                             Durham, NC<br />
                             27704<br />
-                            <i className="fa fa-phone"></i>: +852 1234 5678<br />
-                            <i className="fa fa-envelope"></i>: <a href="mailto:confusion@food.net">confusion@food.net</a>
+                            <i className="fa fa-phone"></i>: (919)123-4567<br />
+                            <i className="fa fa-envelope"></i>: <a href="mailto:mdchvatal@gmail.com">mdchvatal@gmail.com</a>
                             </address>
                     </div>
                     <div className="col-12 col-sm-6 offset-sm-1">

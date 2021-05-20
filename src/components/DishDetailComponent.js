@@ -3,8 +3,10 @@ import {Card, CardImg, CardText, CardBody, CardTitle, Breadcrumb, BreadcrumbItem
 import {Link} from 'react-router-dom';
 import CommentForm from './CommentFormComponent';
 import {Loading} from './LoadingComponent';
+import {baseUrl} from '../shared/baseUrl';
 
-    function RenderComments({comments, addComment, dishId}) {
+
+    function RenderComments({comments, postComment, dishId}) {
         if (comments != null) {
             return (
                 <div>
@@ -13,11 +15,12 @@ import {Loading} from './LoadingComponent';
                         {comments.map((item) => (
                             <div>
                             <li key={item.id}>{item.comment}</li>
-                            <p key={item.id+'a'}>{item.author}, {new Intl.DateTimeFormat('en-US', {year: 'numeric', month: 'short', day: '2-digit'}).format(new Date(Date.parse(item.date)))}</p>
+                            <p></p>
+                            <p key={item.id+'a'}>--{item.author}, {new Intl.DateTimeFormat('en-US', {year: 'numeric', month: 'short', day: '2-digit'}).format(new Date(Date.parse(item.date)))}</p>
                             </div>
                         ))}
                     </ul> 
-                    <CommentForm dishId={dishId} addComment={addComment}/>
+                    <CommentForm dishId={dishId} postComment={postComment}/>
                 </div>
             );
         } else {
@@ -29,7 +32,7 @@ import {Loading} from './LoadingComponent';
         if (dish != null) {
             return (
                 <Card>
-                    <CardImg width="100%" object src={dish.image} alt={dish.name} />
+                    <CardImg width="100%" object src={baseUrl + dish.image} alt={dish.name} />
                     <CardBody>
                         <CardTitle>{dish.name}</CardTitle>
                         <CardText>{dish.description}</CardText>
@@ -79,7 +82,7 @@ import {Loading} from './LoadingComponent';
                                 <RenderDish dish={props.dish} />
                             </div>
                             <div className="col-6 col-md-5 m-1">    
-                                <RenderComments comments={props.comments} addComment={props.addComment} dishId={props.dish.id}/>
+                                <RenderComments comments={props.comments} postComment={props.postComment} dishId={props.dish.id}/>
                             </div>
                     </div>
 
